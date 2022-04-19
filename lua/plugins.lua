@@ -1,16 +1,16 @@
 local vim = vim
 
 -- INSTALLS PACKER IF NOT PRESENT
--- local execute = vim.api.nvim_command
--- local fn = vim.fn
--- local install_path = fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
--- print("install path", install_path)
--- if fn.empty(fn.glob(install_path)) > 0 then
--- 	execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
--- 	execute("packadd packer.nvim")
--- end
+local execute = vim.api.nvim_command
+local fn = vim.fn
+local install_path = fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
+print("install path", install_path)
+if fn.empty(fn.glob(install_path)) > 0 then
+	execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
+	execute("packadd packer.nvim")
+end
 
--- vim.cmd("packadd packer.nvim")
+vim.cmd("packadd packer.nvim")
 
 -- PROTECTED CALL
 local status_ok, packer = pcall(require, "packer")
@@ -39,19 +39,121 @@ function Get_config(name)
 	return string.format('require("%s")', name)
 end
 
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- PLUGINS $$$$$$$$$$$$$$$$$$$$$$$$$$$
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+--       _             _
+--      | |           (_)
+-- _ __ | |_   _  __ _ _ _ __  ___
+--| '_ \| | | | |/ _` | | '_ \/ __|
+--| |_) | | |_| | (_| | | | | \__ \
+--| .__/|_|\__,_|\__, |_|_| |_|___/
+--| |             __/ |
+--|_|            |___/
 
 return packer.startup(function()
 	use("wbthomason/packer.nvim")
 
-	-- UI
+	--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	-- UI                 
+	--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	use({
+		"lewis6991/gitsigns.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+		event = "BufReadPre",
+		config = function()
+			require("config/gitsigns")
+		end,
+	})
+	use({
+		"norcalli/nvim-colorizer.lua",
+		event = "BufReadPre",
+		config = function()
+			require("config/colorizer")
+		end,
+	})
 	use("morhetz/gruvbox")
+	use("Yggdroot/indentLine")
+	use("machakann/vim-highlightedyank")
+	use("p00f/nvim-ts-rainbow")
+	use("EdenEast/nightfox.nvim")
+	use("savq/melange")
+	use("sainnhe/sonokai")
+	use("sainnhe/everforest")
+	use("folke/tokyonight.nvim")
+	use("joshdick/onedark.vim")
+	use("dracula/vim")
+	use({
+		"akinsho/nvim-bufferline.lua",
+		requires = "kyazdani42/nvim-web-devicons",
+		event = "BufReadPre",
+		config = function()
+			require("config/bufferline")
+		end,
+	})
+	use({
+		"nvim-lualine/lualine.nvim",
+		config = function()
+			require("config/lualine")
+		end,
+		event = "VimEnter",
+		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+	})
+	use({
+		"rcarriga/nvim-notify", -- don't know how to use this
+		config = function()
+			require("config/notify")
+		end,
+	})
+	-- Lua
+	use({
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("config/trouble")
+		end,
+	})
 
-	-- CONTROLS
+	--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	-- CONTROLS              
+	--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	use({
+		"akinsho/nvim-toggleterm.lua",
+		keys = { "<C-y>", "<leader>fl", "<leader>gt" },
+		config = function()
+			require("config/toggleterm")
+		end,
+	})
+	use({
+		"Pocco81/AutoSave.nvim",
+		config = function()
+			require("config/autosave")
+		end,
+	})
+	use({
+		"rmagatti/auto-session",
+		config = function()
+			require("auto-session").setup({
+				log_level = "info",
+				auto_session_suppress_dirs = { "~/", "~/Projects" },
+			})
+		end,
+	})
+	use({
+		"qpkorr/vim-bufkill",
+		config = function()
+			require("config/bufkill")
+		end,
+	})
+	use("alvan/vim-closetag")
+	use("AndrewRadev/tagalong.vim")
+	use("jiangmiao/auto-pairs")
+	use("Valloric/MatchTagAlways")
 	use("tpope/vim-commentary")
-	use("tpope/vim-fugitive")
+	use("tpope/vim-surround")
+	use({
+		"tpope/vim-fugitive",
+		config = function()
+			require("config/fugitive")
+		end,
+	})
 	use({
 		"kyazdani42/nvim-tree.lua",
 		config = function()
@@ -60,7 +162,9 @@ return packer.startup(function()
 		requires = { { "kyazdani42/nvim-web-devicons" } },
 	})
 
-	-- LOCATE+RETRIEVE
+	--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	-- LOCATE+RETRIEVE          
+	--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	use({
 		"ThePrimeagen/harpoon",
 		requires = { { "nvim-lua/plenary.nvim" } },
@@ -68,17 +172,33 @@ return packer.startup(function()
 			require("config/harpoon")
 		end,
 	})
+	use({
+		"ibhagwan/fzf-lua",
+		requires = { "kyazdani42/nvim-web-devicons" },
+		config = function()
+			require("config/fzf-lua")
+		end,
+	})
 
-	-- LSP
+	--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	-- LSP                
+	--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	use("ray-x/lsp_signature.nvim")
+	use("rafamadriz/friendly-snippets")
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
-			{ "hrsh7th/cmp-buffer" },
-			{ "hrsh7th/cmp-path" },
-			{ "hrsh7th/cmp-cmdline" },
-			{ "saadparwaiz1/cmp_luasnip" },
-			{ "hrsh7th/cmp-nvim-lsp" },
+			"saadparwaiz1/cmp_luasnip",
+			"L3MON4D3/LuaSnip",
+			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+			"hrsh7th/cmp-nvim-lsp",
 		},
+		config = function()
+			require("config/cmp")
+		end,
 	})
 	use({
 		"nvim-treesitter/nvim-treesitter",

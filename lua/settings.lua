@@ -1,7 +1,6 @@
 -- LANGUAGE PROVIDERS
 vim.g.loaded_python_provider = 0
 vim.g.loaded_perl_provider = 0
-vim.g.node_host_prog = "~/node_modules/neovim/bin/cli.js"
 
 local options = {
 	autochdir = false,
@@ -75,22 +74,8 @@ vim.cmd([[set iskeyword+=-]])
 local M = {}
 
 local servers = {
-	cssls = {},
-	cssmodules_ls = {},
-	diagnosticsls = {},
-	eslint = {},
-	gopls = {},
-	graphql = {},
-	html = {},
-	jsonls = {},
-	pyright = {},
-	rust_analyzer = {},
-	styleline_lsp = {},
-	-- sumneko_lua = {},
+	sumneko_lua = {},
 	tsserver = {},
-	tailwindcss = {},
-	vimls = {},
-	yamlls = {},
 }
 
 local function on_attach(client, bufnr)

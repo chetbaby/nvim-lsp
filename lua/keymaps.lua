@@ -24,13 +24,15 @@ vim.api.nvim_set_keymap("n", "<Leader>x", ":helloooo dere", show) --stupid examp
 
 -- MISC (dump, org later)
 keymap("", "<leader>V", "+y", noshow)
+keymap("", "gq", "<esc>:q<CR>", noshow)
+keymap("", "<leader>hub", ":!hub sync<CR>", noshow)
+keymap("", "<leader>yre", ":!yarn relay<CR>", noshow)
 
 -- TERMINAL
 keymap("t", "<Esc>", "<C-\\><C-n>", noshow)
 keymap("t", "<C-w>", "<Esc><C-w>", noshow)
 
 -- BUFFER
-keymap("", "<leader><leader>b", ":Buffers<CR>", noshow) -- telescope
 keymap("", "<leader>B", "<C-^>", noshow) -- telescope
 keymap("", "<leader>bd", ":%bd!<CR>", noshow)
 keymap("", "<Tab>", ":bnext<CR>", noshow)
@@ -40,13 +42,9 @@ keymap("", "<S-Tab>", ":bprevious<CR>", noshow)
 keymap("", "<esc>", ":noh<CR>", noshow)
 keymap("", "<leader>Q", ":qa!<CR>", noshow)
 keymap("", ";", ":", show)
-keymap("", "<leader>q", ":BD<CR>", noshow)
 keymap("", "<leader>w", ":noa w<CR>", noshow)
 keymap("", "<leader>W", ":w<CR>", noshow)
 keymap("", "<leader>pw", ":pwd<CR>", noshow)
-keymap("", "<leader>r", ":so ~/.config/nvim/init.vim<CR>", show)
--- keymap('', '<leader>tr', ':call TrimWhitespace()<CR>', noshow)
-keymap("", "<leader>co", ":Colors<CR>", noshow) -- telescope?
 
 -- SPLIT CONTROL
 keymap("", "<leader>sp", ":split<CR>", noshow)
@@ -73,6 +71,7 @@ keymap("v", ">", ">gv", noshow)
 
 -- FOLDING
 keymap("", "<F8>", "zA", noshow)
+keymap("", "<F9>", "zR", noshow)
 keymap("", "ff", "za", noshow)
 
 -- MARKS
@@ -93,27 +92,6 @@ keymap("n", "'r", "mR", noshow)
 keymap("n", "mr", "'Rzz", noshow)
 keymap("n", "'t", "mT", noshow)
 keymap("n", "<leader>dma", ":delmarks A-Z0-9<CR>", noshow)
-
--- GIT SHIT
--- keymap("", "<leader>cm", ":BCommits<CR>", noshow) -- telescope
--- keymap("", "<leader><leader>g", ":Git<CR>", show)
-keymap("", "<leader>gb", ":G blame<CR>", show)
--- keymap("", "<leader>log", ":G log<CR>", show)
--- keymap("", "<leader>ga", ":G add .<CR>", show)
-keymap("", "<leader>gc", ":G commit<CR>", show)
-keymap("", "<leader>amen", ":G commit --amend --no-edit<CR>", show)
-keymap("", "<leader>up", ":G push -u origin<CR>", show)
-keymap("", "<leader>chk", ":G checkout<CR>", show)
-keymap("", "<leader>nb", ":G checkout -b", show)
--- keymap("", "<leader>br", ":G branch<CR>", show) -- telescope?
-keymap("", "<leader>res", ":G reset --hard", show)
--- keymap("", "<leader>rr", ":G checkout --<CR>", show)
-keymap("", "<leader>sta", ":G stash --index<CR>", show)
--- keymap("", "<leader>dif", ":SignifyDiff<CR>", noshow) -- another lua dif plugin?
--- keymap("", "<leader>mf", ":diffget //2<CR>", show) -- diff stuff i don't use
--- keymap("", "<leader>mj", ":diffget //3<CR>", show) -- diff stuff i don't use
-keymap("", "<leader>G", ":15split | Gedit :<CR>", show)
-keymap("", "<leader>hub", ":GBrowse<CR>", noshow)
 
 -- RESIZE WITH ARROWS
 keymap("n", "<M-Up>", ":resize -2<CR>", noshow)
