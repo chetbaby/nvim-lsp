@@ -166,6 +166,11 @@ _G.packer_plugins = {
     path = "/Users/cbaby/.local/share/nvim/site/pack/packer/start/indentLine",
     url = "https://github.com/Yggdroot/indentLine"
   },
+  ["lsp-colors.nvim"] = {
+    loaded = true,
+    path = "/Users/cbaby/.local/share/nvim/site/pack/packer/start/lsp-colors.nvim",
+    url = "https://github.com/folke/lsp-colors.nvim"
+  },
   ["lsp_signature.nvim"] = {
     loaded = true,
     path = "/Users/cbaby/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim",

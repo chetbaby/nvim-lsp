@@ -54,6 +54,7 @@ keymap("", "<leader>ee", "<C-w>=", noshow)
 
 -- MOVEMENT
 keymap("", "<leader>j", "<C-w><C-w>", noshow) -- next split
+keymap("", "<leader>J", "<C-w>p", noshow) -- next split
 keymap("", "Y", "y$", noshow) -- select to end of line
 keymap("n", "L", "15j", noshow)
 keymap("n", "H", "15k", noshow)

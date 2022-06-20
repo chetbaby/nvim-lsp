@@ -54,6 +54,7 @@ return packer.startup(function()
 	--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	-- UI                 
 	--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	use("folke/lsp-colors.nvim")
 	use({
 		"lewis6991/gitsigns.nvim",
 		requires = { "nvim-lua/plenary.nvim" },
