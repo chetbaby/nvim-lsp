@@ -4,5 +4,6 @@ if not status_ok then
 	return
 end
 
+require("config/lsp_installer")
 require("config/lsp_handlers").setup()
 require("config/null-ls")
