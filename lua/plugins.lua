@@ -155,6 +155,7 @@ return packer.startup(function()
 		end,
 	})
 	use("tpope/vim-surround")
+	use("tpope/vim-rhubarb")
 	use({
 		"tpope/vim-fugitive",
 		config = function()
