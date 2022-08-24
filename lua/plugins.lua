@@ -113,7 +113,7 @@ return packer.startup(function()
 	})
 
 	--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	-- CONTROLS              
+	--  CONTROLS              
 	--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	use({
 		"akinsho/nvim-toggleterm.lua",
@@ -147,7 +147,13 @@ return packer.startup(function()
 	use("AndrewRadev/tagalong.vim")
 	use("jiangmiao/auto-pairs")
 	use("Valloric/MatchTagAlways")
-	use("tpope/vim-commentary")
+	use("JoosepAlviste/nvim-ts-context-commentstring") --for jsx comments
+	use({
+		"numToStr/Comment.nvim",
+		config = function()
+			require("config/comment").setup()
+		end,
+	})
 	use("tpope/vim-surround")
 	use({
 		"tpope/vim-fugitive",

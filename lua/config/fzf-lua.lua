@@ -4,6 +4,7 @@ local noshow = { noremap = true, silent = true }
 local show = { noremap = true, silent = false }
 local keymap = vim.api.nvim_set_keymap
 
+vim.g.fzf_history_dir = '~/.config/nvim/fzf/.history'
 keymap("n", "<leader>fi", ":FzfLua files<CR>", noshow)
 keymap("n", "<leader>br", ":FzfLua git_branches<CR>", noshow)
 keymap("n", "<leader>cm", ":FzfLua git_commits<CR>", noshow)
@@ -239,7 +240,7 @@ require("fzf-lua").setup({
 		-- NOTE: 'find -printf' requires GNU find
 		-- cmd            = "find . -type f -printf '%P\n'",
 		find_opts = [[-type f -not -path '*/\.git/*' -printf '%P\n']],
-		rg_opts = "--color=never --files --hidden --follow -g '!.git'",
+		rg_opts = "--color=never --files --hidden --follow -g -sort path '!.git'",
 		fd_opts = "--color=never --type f --hidden --follow --exclude .git",
 		actions = {
 			-- inherits from 'actions.files', here we can override
