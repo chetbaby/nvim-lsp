@@ -83,6 +83,7 @@ return packer.startup(function()
 	use("dracula/vim")
 	use({
 		"akinsho/nvim-bufferline.lua",
+		tag = "v2.*",
 		requires = "kyazdani42/nvim-web-devicons",
 		event = "BufReadPre",
 		config = function()
@@ -117,15 +118,16 @@ return packer.startup(function()
 	--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	use({
 		"akinsho/nvim-toggleterm.lua",
+		tag = "v2.*",
 		keys = { "<C-y>", "<leader>fl", "<leader>gt" },
 		config = function()
 			require("config/toggleterm")
 		end,
 	})
 	use({
-		"Pocco81/AutoSave.nvim",
+		"Pocco81/auto-save.nvim",
 		config = function()
-			require("config/autosave")
+			require("config/auto-save")
 		end,
 	})
 	use({
@@ -151,7 +153,7 @@ return packer.startup(function()
 	use({
 		"numToStr/Comment.nvim",
 		config = function()
-			require("config/comment").setup()
+			require("config/comment")
 		end,
 	})
 	use("tpope/vim-surround")
