@@ -124,12 +124,12 @@ return packer.startup(function()
 			require("config/toggleterm")
 		end,
 	})
-	use({
-		"Pocco81/auto-save.nvim",
-		config = function()
-			require("config/auto-save")
-		end,
-	})
+	--[[ use({ ]]
+	--[[ 	"Pocco81/auto-save.nvim", ]]
+	--[[ 	config = function() ]]
+	--[[ 		require("config/auto-save") ]]
+	--[[ 	end, ]]
+	--[[ }) ]]
 	use({
 		"rmagatti/auto-session",
 		config = function()
