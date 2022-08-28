@@ -71,7 +71,7 @@ end
 vim.cmd("set whichwrap+=<,>,[,],h,l")
 vim.cmd([[set iskeyword+=-]])
 
--- ***********  FOR LSP  ***********
+-- ***********  FOR LSP  *********** not doing anything
 local M = {}
 
 local servers = {

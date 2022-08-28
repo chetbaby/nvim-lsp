@@ -1,10 +1,12 @@
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
+	print("cmp did not load")
 	return
 end
 
-local snip_status_ok, luasnip = pcall(require, "luasnip")
+local snip_status_ok, ls = pcall(require, "luasnip")
 if not snip_status_ok then
+	print("luasnip did not load")
 	return
 end
 
@@ -18,18 +20,45 @@ local check_backspace = function()
 end
 
 -- luasnip config
---[[ luasnip.config.set.config({ ]]
---[[ 	history = true, ]]
---[[ 	updateevents = "TextChanged,TextChangedI", ]]
---[[ 	enable_autosnippets = true, ]]
---[[ 	ext_opts = { ]]
---[[ 		[types.choiceNode] = { ]]
---[[ 			active = { ]]
---[[ 				virt_text = { { "<-", "Error" } }, ]]
---[[ 			}, ]]
---[[ 		}, ]]
---[[ 	}, ]]
---[[ }) ]]
+ls.config.set_config({
+	history = true,
+	updateevents = "TextChanged,TextChangedI",
+	enable_autosnippets = true,
+	--[[ ext_opts = { ]]
+	--[[ 	[types.choiceNode] = { ]]
+	--[[ 		active = { ]]
+	--[[ 			virt_text = { { "<-", "Error" } }, ]]
+	--[[ 		}, ]]
+	--[[ 	}, ]]
+	--[[ }, ]]
+})
+
+vim.keymap.set({ "i", "s" }, "<c-o>", function()
+	print("heklo")
+	if ls.expand_or_jumpable() then
+		ls.expand_or_jump()
+	end
+end, { silent = true })
+
+vim.keymap.set({ "i", "s" }, "<c-j>", function()
+	if ls.jumpable(-1) then
+		ls.jump(-1)
+	end
+end, { silent = true })
+
+vim.keymap.set("i", "<c-l>", function()
+	if ls.choice_active() then
+		ls.change_choice(1)
+	end
+end)
+
+vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/config/cmp.lua<CR>")
+
+-- SNIPPETS
+ls.add_snippets("all", {
+	ls.parser.parse_snippet("exp", "expansion pack"),
+	ls.parser.parse_snippet("lf", "local $1 = function($2)\n   $0\nend"),
+})
 
 --   פּ ﯟ   some other good icons
 local kind_icons = {
@@ -64,7 +93,7 @@ local kind_icons = {
 cmp.setup({
 	snippet = {
 		expand = function(args)
-			luasnip.lsp_expand(args.body) -- For `luasnip` users.
+			ls.lsp_expand(args.body) -- For `luasnip` users.
 		end,
 	},
 	mapping = {
@@ -84,10 +113,10 @@ cmp.setup({
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
-			elseif luasnip.expandable() then
-				luasnip.expand()
-			elseif luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
+			elseif ls.expandable() then
+				ls.expand()
+			elseif ls.expand_or_jumpable() then
+				ls.expand_or_jump()
 			elseif check_backspace() then
 				fallback()
 			else
@@ -100,8 +129,8 @@ cmp.setup({
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
+			elseif ls.jumpable(-1) then
+				ls.jump(-1)
 			else
 				fallback()
 			end
