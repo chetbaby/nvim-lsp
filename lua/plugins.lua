@@ -35,10 +35,6 @@ packer.init({
 	},
 })
 
-function Get_config(name)
-	return string.format('require("%s")', name)
-end
-
 --       _             _
 --      | |           (_)
 -- _ __ | |_   _  __ _ _ _ __  ___
@@ -208,6 +204,12 @@ return packer.startup(function()
 		},
 		config = function()
 			require("config/cmp")
+		end,
+	})
+	use({
+		"nvim-treesitter/nvim-treesitter-context",
+		config = function()
+			require("config/treesitter-context")
 		end,
 	})
 	use({
