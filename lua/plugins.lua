@@ -1,14 +1,14 @@
 local vim = vim
 
 -- INSTALLS PACKER IF NOT PRESENT
-local execute = vim.api.nvim_command
-local fn = vim.fn
-local install_path = fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
-print("install path", install_path)
-if fn.empty(fn.glob(install_path)) > 0 then
-	execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
-	execute("packadd packer.nvim")
-end
+--[[ local execute = vim.api.nvim_command ]]
+--[[ local fn = vim.fn ]]
+--[[ local install_path = fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim" ]]
+--[[ print("install path", install_path) ]]
+--[[ if fn.empty(fn.glob(install_path)) > 0 then ]]
+--[[ 	execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path) ]]
+--[[ 	execute("packadd packer.nvim") ]]
+--[[ end ]]
 
 vim.cmd("packadd packer.nvim")
 
@@ -50,6 +50,12 @@ return packer.startup(function()
 	--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	-- UI                 
 	--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+	use({
+		"j-hui/fidget.nvim",
+		config = function()
+			require("fidget").setup()
+		end,
+	})
 	use("folke/lsp-colors.nvim")
 	use({
 		"lewis6991/gitsigns.nvim",
@@ -167,6 +173,7 @@ return packer.startup(function()
 		end,
 		requires = { { "kyazdani42/nvim-web-devicons" } },
 	})
+	use("romainl/vim-qf")
 
 	--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	-- LOCATE+RETRIEVE          
