@@ -28,6 +28,9 @@ keymap("", "gq", "<esc>:q<CR>", noshow)
 keymap("", "<leader>hub", ":!hub sync<CR>", noshow)
 keymap("", "<leader>yre", ":!yarn relay<CR>", noshow)
 
+-- QF LIST
+keymap("", "<leader><leader>c", ":ccl<CR>", noshow)
+
 -- TERMINAL
 keymap("t", "<Esc>", "<C-\\><C-n>", noshow)
 keymap("t", "<C-w>", "<Esc><C-w>", noshow)
