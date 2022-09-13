@@ -77,6 +77,15 @@ keymap("v", ">", ">gv", noshow)
 keymap("", "<F8>", "zA", noshow)
 keymap("", "<F9>", "zR", noshow)
 keymap("", "ff", "za", noshow)
+vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+vim.keymap.set("n", "P", function()
+	local winid = require("ufo").peekFoldedLinesUnderCursor()
+	if not winid then
+		-- nvimlsp
+		vim.lsp.buf.hover()
+	end
+end)
 
 -- MARKS
 keymap("n", "ma", "'Azz", noshow)
