@@ -57,7 +57,13 @@ vim.keymap.set("n", "<leader><leader>s", "<cmd>source ~/.config/nvim/lua/config/
 -- SNIPPETS
 ls.add_snippets("all", {
 	ls.parser.parse_snippet("exp", "expansion pack"),
-	ls.parser.parse_snippet("lf", "local $1 = function($2)\n   $0\nend"),
+})
+
+ls.add_snippets("lua", {
+	ls.parser.parse_snippet("lv", "local $1 = $2)\n   $0\nend"),
+	ls.parser.parse_snippet("pr", "print('$1')"),
+	ls.parser.parse_snippet(".se", ".setup({\n  $1\n})"),
+	ls.parser.parse_snippet("km", "vim.keymap.set($1, '$2', $3)"),
 })
 
 --   פּ ﯟ   some other good icons
