@@ -45,9 +45,9 @@ end
 
 local function lsp_highlight_document(client) -- highlights symbol on hover
 	-- Set autocommands conditional on server_capabilities
-	if client.resolved_capabilities.document_highlight then
 		vim.api.nvim_exec(
 			[[
+  if client.server_capabilities.document_highlight then
       augroup lsp_document_highlight
         autocmd! * <buffer>
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
@@ -92,8 +92,8 @@ end
 -- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 M.on_attach = function(client, bufnr)
-	if client.resolved_capabilities.document_formatting then
 		vim.cmd([[
+  if client.server_capabilities.documentFormattingProvider then
 	augroup LspFormatting
 	autocmd! * <buffer>
 	autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
@@ -102,19 +102,19 @@ M.on_attach = function(client, bufnr)
 		vim.cmd("nnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.formatting()<CR>")
 	end
 	if client.name == "tsserver" then
-		client.resolved_capabilities.document_formatting = false
-		client.resolved_capabilities.document_range_formatting = false
 	end
 	if client.name == "sumneko_lua" then
-		client.resolved_capabilities.document_formatting = false
-		client.resolved_capabilities.document_range_formatting = false
 	end
 	if client.name == "jsonls" then
-		client.resolved_capabilities.document_formatting = false
-		client.resolved_capabilities.document_range_formatting = false
 	end
 	lsp_keymaps(bufnr)
 	-- lsp_highlight_document(client)
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

@@ -11,8 +11,8 @@ local code_actions = null_ls.builtins.code_actions
 
 null_ls.setup({
 	on_attach = function(client)
-		if client.resolved_capabilities.document_formatting then
 			vim.cmd([[
+    if client.server_capabilities.documentFormattingProvider then
             augroup LspFormatting
                 autocmd! * <buffer>
                 autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
