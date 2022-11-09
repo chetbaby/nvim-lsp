@@ -25,6 +25,7 @@ null_ls.setup({
 	sources = {
 		formatting.prettierd,
 		formatting.stylua,
+		--[[ formatting.eslint_d, ]]
 		diagnostics.eslint_d,
 		code_actions.eslint_d,
 	},

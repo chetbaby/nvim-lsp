@@ -5,5 +5,5 @@ if not status_ok then
 end
 
 require("config/lsp_installer")
-require("config/null-ls")
+require("config/null_ls")
 require("config/lsp_handlers").setup()
