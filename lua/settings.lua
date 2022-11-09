@@ -1,7 +1,5 @@
 -- LANGUAGE PROVIDERS
-vim.g.loaded_python_provider = 0
 vim.g.loaded_perl_provider = 0
--- vim.g.node_host_prog = "/Users/cbaby/.nvm/versions/node/v16.14.1/bin/neovim-node-host"
 
 local options = {
 	autochdir = false,

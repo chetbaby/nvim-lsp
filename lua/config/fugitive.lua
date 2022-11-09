@@ -22,3 +22,4 @@ keymap("", "<leader>sta", ":G stash --index<CR>", show)
 -- keymap("", "<leader>mj", ":diffget //3<CR>", show) -- diff stuff i don't use
 keymap("", "<leader>G", ":15split | Gedit :<CR>", show)
 keymap("", "<leader>hub", ":GBrowse<CR>", noshow)
+keymap("", "<leader><leader>res", ":Gread<CR>", noshow)

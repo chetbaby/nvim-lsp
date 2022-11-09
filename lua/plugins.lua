@@ -202,7 +202,12 @@ return packer.startup(function()
 	--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	-- LSP                
 	--  >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-	use("ray-x/lsp_signature.nvim")
+	use({
+		"ray-x/lsp_signature.nvim", -- not sure this is working
+		config = function()
+			require("config/lsp_signature")
+		end,
+	})
 	use("rafamadriz/friendly-snippets")
 	use({
 		"hrsh7th/nvim-cmp",
